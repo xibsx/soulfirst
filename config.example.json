@@ -1,0 +1,197 @@
+{
+  // ============================================================
+  // SoulFirst — OpenClaw Configuration Template
+  // ============================================================
+  // Copy this to ~/.openclaw/openclaw.json and fill in your API keys.
+  // All YOUR_*_HERE values must be replaced before use.
+  // ============================================================
+
+  "models": {
+    "mode": "merge",
+    "providers": {
+
+      // ----------------------------------------------------------
+      // Anthropic — Primary provider (Opus + Sonnet)
+      // ----------------------------------------------------------
+      // No explicit model entry needed — OpenClaw's built-in
+      // Anthropic adapter auto-discovers claude-opus and sonnet.
+      // Just set ANTHROPIC_API_KEY in your .env file.
+
+      // ----------------------------------------------------------
+      // OpenAI — Fallback provider
+      // ----------------------------------------------------------
+      "openai": {
+        "baseUrl": "https://api.openai.com/v1",
+        "auth": "api-key",
+        "api": "openai-responses",
+        "models": [
+          {
+            "id": "gpt-5.4-mini",
+            "name": "GPT-5.4 mini",
+            "api": "openai-responses",
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          }
+        ]
+      },
+
+      // ----------------------------------------------------------
+      // Google Gemini Flash — Browser & web task executor
+      // ----------------------------------------------------------
+      "google-flash": {
+        "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+        "apiKey": { "source": "env", "provider": "default", "id": "GOOGLE_FLASH_API_KEY" },
+        "auth": "api-key",
+        "api": "google-generative-ai",
+        "models": [
+          {
+            "id": "gemini-3-flash-preview",
+            "name": "Gemini 3 Flash Preview",
+            "api": "google-generative-ai",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 1048576,
+            "maxTokens": 65536
+          }
+        ]
+      },
+
+      // ----------------------------------------------------------
+      // MiniMax — Execution layer (email, files, TTS, cron)
+      // ----------------------------------------------------------
+      "minimax": {
+        "baseUrl": "https://api.minimax.io/anthropic",
+        "apiKey": { "source": "env", "provider": "default", "id": "MINIMAX_API_KEY" },
+        "api": "anthropic-messages",
+        "authHeader": true,
+        "models": [
+          {
+            "id": "MiniMax-M2.7-highspeed",
+            "name": "MiniMax M2.7 Highspeed",
+            "api": "anthropic-messages",
+            "reasoning": true,
+            "input": ["text"],
+            "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.05, "cacheWrite": 0.15 },
+            "contextWindow": 204800,
+            "maxTokens": 204800
+          }
+        ]
+      }
+    }
+  },
+
+  // ============================================================
+  // Agent Defaults
+  // ============================================================
+  "agents": {
+    "defaults": {
+
+      // Primary model: Opus for reasoning, conversation, planning
+      "model": {
+        "primary": "anthropic/claude-opus-4-6",
+        "fallbacks": [
+          "anthropic/claude-sonnet-4-6",
+          "openai/gpt-5.4"
+        ]
+      },
+
+      // Model aliases and per-model overrides
+      "models": {
+        "anthropic/claude-opus-4-6": {
+          "alias": "opus",
+          "params": { "thinking": "xhigh", "contextWindow": 1000000 }
+        },
+        "anthropic/claude-sonnet-4-6": {
+          "alias": "sonnet",
+          "params": { "contextWindow": 1000000 }
+        },
+        "openai/gpt-5.4": {
+          "alias": "gpt54",
+          "params": { "thinking": "xhigh" }
+        },
+        "openai/gpt-5.4-mini": {
+          "alias": "mini",
+          "params": { "contextWindow": 400000 }
+        },
+        "google-flash/gemini-3-flash-preview": {
+          "alias": "flash"
+        },
+        "minimax/MiniMax-M2.7-highspeed": {
+          "alias": "m27h"
+        }
+      },
+
+      "workspace": "/path/to/your/soulfirst-workspace",
+
+      // Memory search (requires Gemini embedding)
+      "memorySearch": {
+        "enabled": true,
+        "sources": ["memory"],
+        "provider": "gemini",
+        "fallback": "none",
+        "model": "gemini-embedding-001"
+      },
+
+      // Compaction model (used when context nears token limit)
+      "compaction": {
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+
+      "thinkingDefault": "high",
+
+      // Heartbeat — periodic background checks
+      "heartbeat": {
+        "every": "15m",
+        "model": "minimax/MiniMax-M2.7-highspeed",
+        "target": "last",
+        "ackMaxChars": 20,
+        "suppressToolErrorWarnings": true,
+        "lightContext": true
+      },
+
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+
+  // ============================================================
+  // Tools
+  // ============================================================
+  "tools": {
+    "profile": "full"
+  },
+
+  // ============================================================
+  // Browser (optional)
+  // ============================================================
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "user"
+  },
+
+  // ============================================================
+  // Channel — pick one (Telegram example shown)
+  // ============================================================
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "botToken": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+      "allowFrom": ["tg:YOUR_TELEGRAM_USER_ID"],
+      "groupPolicy": "allowlist",
+      "streaming": "off"
+    }
+  },
+
+  // ============================================================
+  // Gateway
+  // ============================================================
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback"
+  }
+}
