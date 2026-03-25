@@ -75,6 +75,16 @@
             "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.05, "cacheWrite": 0.15 },
             "contextWindow": 204800,
             "maxTokens": 204800
+          },
+          {
+            "id": "MiniMax-M2.7",
+            "name": "MiniMax M2.7",
+            "api": "anthropic-messages",
+            "reasoning": true,
+            "input": ["text"],
+            "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.05, "cacheWrite": 0.15 },
+            "contextWindow": 204800,
+            "maxTokens": 204800
           }
         ]
       }
@@ -119,6 +129,9 @@
         },
         "minimax/MiniMax-M2.7-highspeed": {
           "alias": "m27h"
+        },
+        "minimax/MiniMax-M2.7": {
+          "alias": "m27"
         }
       },
 
@@ -143,7 +156,7 @@
       // Heartbeat — periodic background checks
       "heartbeat": {
         "every": "15m",
-        "model": "minimax/MiniMax-M2.7-highspeed",
+        "model": "minimax/MiniMax-M2.7",
         "target": "last",
         "ackMaxChars": 20,
         "suppressToolErrorWarnings": true,
