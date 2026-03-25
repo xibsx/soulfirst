@@ -1,6 +1,10 @@
 # SoulFirst
 
-![Manifesto](assets/manifesto.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/manifesto-light.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/manifesto-dark.png">
+  <img alt="Manifesto" src="assets/manifesto-dark.png">
+</picture>
 
 ---
 
