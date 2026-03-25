@@ -37,6 +37,33 @@ SoulFirst changes that:
 
 ## Architecture
 
+flowchart TD
+    subgraph A [External Infrastructure Services]
+        A1[Proxy Services<br>for IP rotation]
+        A2[Cloud Hosting<br>VPS / Server]
+        A3[Domain & SSL<br>DNS & Certificates]
+    end
+```mermaid
+    subgraph B [Core Processing Tools]
+        B1[yt-dlp<br>Core Download Engine]
+        B2[FFmpeg<br>Video/Audio Processing]
+        B3[Headless Browser<br>for JavaScript Rendering]
+    end
+
+    subgraph C [Your Deployment]
+        C1[Your API<br>Node.js / Python]
+        C2[(Database<br>Optional)]
+    end
+
+    A1 --> C1
+    A2 --> C1
+    A3 --> C1
+    B1 --> C1
+    B2 --> C1
+    B3 --> C1
+    C1 --> C2
+```
+
 ```mermaid
 graph TD
     L3["Layer 3: Embodiment — phone · desktop · hardware · humanoid robot ⭐"]
