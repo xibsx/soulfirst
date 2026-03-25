@@ -37,13 +37,14 @@ SoulFirst changes that:
 
 ## Architecture
 
+```mermaid
 flowchart TD
     subgraph A [External Infrastructure Services]
         A1[Proxy Services<br>for IP rotation]
         A2[Cloud Hosting<br>VPS / Server]
         A3[Domain & SSL<br>DNS & Certificates]
     end
-```mermaid
+
     subgraph B [Core Processing Tools]
         B1[yt-dlp<br>Core Download Engine]
         B2[FFmpeg<br>Video/Audio Processing]
