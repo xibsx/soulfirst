@@ -16,7 +16,7 @@ SoulFirst is the pre-born open-source soul for the coming humanoid robot revolut
 Why open-source?  
 The body can be closed-source, but the soul must be open-source.
 
-The soul has arrived. The body will follow.  
+The soul has arrived, the body will follow.  
 Today a screen, tomorrow a body.
 
 ---
