@@ -60,6 +60,7 @@ We believe this is too important for one person to build alone.
 - ⭐ Star this repo
 - 🤝 See [Contributing](CONTRIBUTING.md)
 - 💬 Open an [issue](https://github.com/soulfirst/soulfirst/issues) to share ideas
+- 🏛️ Become a [Founding Builder](FOUNDING_BUILDERS.md) — your name stays here forever
 
 ---
 

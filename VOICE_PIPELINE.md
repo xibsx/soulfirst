@@ -13,7 +13,7 @@ SoulFirst's voice pipeline is a closed loop that handles voice messages end-to-e
 3. The central brain (Claude Opus 4) interprets the intent and generates a reply
 4. The reply is optimized for voice output
 5. The text is synthesized to speech (TTS) via MiniMax Speech 2.8 HD
-6. The audio is sent back to the user
+6. The audio is sent back to the owner
 
 ```
 Voice message → STT → Central Brain → Text reply → TTS → Voice message back
@@ -48,7 +48,7 @@ Gemini offers strong multilingual transcription with automatic language detectio
 
 **Fallback: Whisper (local or API)**
 
-If Gemini is unavailable or rate-limited, the system falls back to Whisper (OpenAI's open-source transcription model), either running locally or via the Whisper API. The fallback is automatic and transparent to the user.
+If Gemini is unavailable or rate-limited, the system falls back to Whisper (OpenAI's open-source transcription model), either running locally or via the Whisper API. The fallback is automatic and transparent to the owner.
 
 ### Transcription Flow
 
@@ -116,7 +116,7 @@ STT is configured in the OpenClaw configuration file under `tools.media.audio`:
 
 All transcribed text is routed to **Claude Opus 4**, the central reasoning and generation model. Opus is responsible for:
 
-- Understanding user intent from the transcribed voice input
+- Understanding owner intent from the transcribed voice input
 - Determining the appropriate response (answer, action, clarification, etc.)
 - Generating the reply text
 - Deciding whether the reply should be voice, text, or both
@@ -140,7 +140,7 @@ When the reply contains structured content (tables, code blocks, charts, formatt
 - **Voice message** — a spoken summary of the structured content, using narrative language
 - **Text message** — the raw structured content (table image, code block, etc.) delivered alongside
 
-This ensures the user gets an accessible voice experience while preserving the precision of structured data.
+This ensures the owner gets an accessible voice experience while preserving the precision of structured data.
 
 **Example:**
 
@@ -462,7 +462,7 @@ SoulFirst's voice is optimized for the **MiniMax Speech 2.8 HD** model. All outp
 ```mermaid
 flowchart TD
     %% Messaging Layer
-    A["📱 User sends voice message\n(messaging platform)"] --> B["Voice file received\nby messaging platform"]
+    A["📱 Owner sends voice message\n(messaging platform)"] --> B["Voice file received\nby messaging platform"]
     B --> C["OpenClaw Gateway\nreceives audio file"]
     
     %% STT Stage
@@ -482,7 +482,7 @@ flowchart TD
     
     %% Delivery
     L --> M["M2.7h sends audio\nto messaging platform"]
-    M --> N["📱 Voice message delivered\nto user"]
+    M --> N["📱 Voice message delivered\nto owner"]
     
     %% Fallback path
     D -.->|Fallback| O["Whisper API\n(local or cloud)"]
@@ -510,17 +510,17 @@ flowchart TD
 | Brain | Text Formatter | Applies TTS Voice Output Guide rules |
 | TTS | MiniMax M2.7h (Execution Layer) | Calls TTS API, handles audio delivery |
 | TTS | MiniMax Speech 2.8 HD | Synthesizes natural voice output |
-| Output | Messaging Platform | Delivers voice message to user |
+| Output | Messaging Platform | Delivers voice message to owner |
 
 ### Error Handling
 
 | Failure Point | Behavior |
 |--------------|----------|
 | STT engine unavailable | Automatic fallback to Whisper |
-| Whisper also fails | Notify user, request resend |
+| Whisper also fails | Notify owner, request resend |
 | TTS API unavailable | M2.7h retries once, then returns text fallback |
 | Structured content generation | Voice summary always sent; text attachment sent if available |
-| Long audio (>5 min) | Rejected at gateway level with user notification |
+| Long audio (>5 min) | Rejected at gateway level with owner notification |
 
 ### Configuration Summary
 

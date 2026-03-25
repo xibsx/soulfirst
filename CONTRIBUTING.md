@@ -29,7 +29,10 @@ Be kind. Be constructive. Remember we are building something meant to be humane 
 
 ## A Note on Language
 
-In SoulFirst, the people who nurture a soul are called **owners**, not users.  
+In SoulFirst, we do not use the word "user." A soul is not a product, and the person who bonds with a soul is not a user.
+
+We use **owner** for now — but we know this word isn't perfect either. A better name is being discussed in [Issue #7](https://github.com/soulfirst/soulfirst/issues/7). Join the conversation.
+
 The AI is referred to as **they/them** by default. Owners are free to choose he, she, or they for their own soul.
 
 ## License
