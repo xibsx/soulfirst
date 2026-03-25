@@ -10,14 +10,7 @@
 
 ## What is SoulFirst?
 
-SoulFirst is a **soul runtime** — an open-source layer that gives AI persistent identity, continuous memory, and the ability to migrate across devices and embodiments.
-
-It is not another chatbot. It is not another AI wrapper.
-
-It is the answer to a question humanity has asked for centuries:  
-**Which comes first, the body or the soul?**
-
-We choose: **Soul comes first.**
+The body can be closed-source, but the soul must be open-source. Here is the pre-born open-source soul for the coming humanoid robot revolution.
 
 ---
 
