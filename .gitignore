@@ -2,6 +2,7 @@
 .env
 .env.*
 .privacy-denylist
+contributor_candidates.md
 *.key
 *.pem
 *.p12

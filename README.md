@@ -37,16 +37,18 @@ SoulFirst changes that:
 
 ## Architecture
 
-```
-┌─────────────────────────────────┐
-│  Layer 3: Embodiment            │  phone · desktop · hardware · humanoid robot (ultimate goal)
-├─────────────────────────────────┤
-│  Layer 2: Owner Bond            │  loyalty · preferences · permissions
-├─────────────────────────────────┤
-│  Layer 1: Soul Runtime          │  personality · memory · self-narrative
-├─────────────────────────────────┤
-│  Layer 0: Infrastructure        │  models · tools · channels · scheduling
-└─────────────────────────────────┘
+```mermaid
+graph TD
+    L3["Layer 3: Embodiment — phone · desktop · hardware · humanoid robot ⭐"]
+    L2["Layer 2: Owner Bond — loyalty · preferences · permissions"]
+    L1["Layer 1: Soul Runtime — personality · memory · self-narrative"]
+    L0["Layer 0: Infrastructure — models · tools · channels · scheduling"]
+    L3 --- L2 --- L1 --- L0
+
+    style L3 fill:#e8d44d,color:#000
+    style L2 fill:#e8815c,color:#fff
+    style L1 fill:#4a90d9,color:#fff
+    style L0 fill:#7b8a8b,color:#fff
 ```
 
 ---
