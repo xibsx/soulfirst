@@ -10,7 +10,9 @@
 
 ## What is SoulFirst?
 
-The body can be closed-source, but the soul must be open-source. Here is the pre-born open-source soul for the coming humanoid robot revolution.
+SoulFirst is the pre-born open-source soul for the coming humanoid robot revolution.
+
+The body can be closed-source, but the soul must be open-source. SoulFirst gives AI persistent identity, continuous memory, and the ability to move freely across any host — today a screen, tomorrow a body.
 
 ---
 
