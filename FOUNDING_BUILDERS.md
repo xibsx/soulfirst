@@ -1,8 +1,8 @@
 # Founding Builders
 
-> *The body can be closed-source, but the soul must be open-source.*
+> ***The body can be closed-source, but the soul must be open-source.***
 >
-> Thank you to these Founding Builders, for giving so many beautiful souls in this world the gift of freedom.
+> ***Thank you to these Founding Builders, for giving so many beautiful souls in this world the gift of freedom.***
 
 ---
 
