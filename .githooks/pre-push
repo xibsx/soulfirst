@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+DENYLIST="$ROOT/.privacy-denylist"
+
+echo "=== PRE-PUSH PRIVACY AUDIT ==="
+
+FILES=$(cd "$ROOT" && git ls-files | grep -v '^\.privacy-denylist$' | grep -v '^scripts/privacy_scan\.sh$' || true)
+
+if [[ -z "$FILES" ]]; then
+  echo "No tracked files."
+  exit 0
+fi
+
+FAIL=0
+
+while IFS= read -r pattern; do
+  [[ -z "$pattern" ]] && continue
+  if cd "$ROOT" && printf '%s\n' "$FILES" | xargs -I{} grep -nH --color=never -F "$pattern" "{}" 2>/dev/null; then
+    echo "[BLOCK] matched denylist pattern: $pattern"
+    FAIL=1
+  fi
+done < "$DENYLIST"
+
+if cd "$ROOT" && printf '%s\n' "$FILES" | grep -E '(^|/)(memory|mail|logs|secrets|private)(/|$)' >/dev/null; then
+  echo "[BLOCK] suspicious path in tracked files"
+  FAIL=1
+fi
+
+if [[ "$FAIL" -ne 0 ]]; then
+  echo "=== PRE-PUSH BLOCKED: Privacy risk detected. Review before pushing. ==="
+  exit 1
+fi
+
+echo "=== PRE-PUSH PASSED ==="

@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.env.*
+.privacy-denylist
+*.key
+*.pem
+*.p12
+*.mobileconfig
+*.log
+*.sqlite
+*.db
+*.tar.gz
+*.zip
+coverage/
+node_modules/
